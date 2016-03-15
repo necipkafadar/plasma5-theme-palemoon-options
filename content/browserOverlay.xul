@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
+<?xml-stylesheet type="text/css"
+  href="chrome://plasma5-theme-palemoon-options/skin/browserOverlay.css" ?>
+
+<!DOCTYPE overlay SYSTEM
+  "chrome://plasma5-theme-palemoon-options/locale/browserOverlay.dtd">
+
+<overlay id="plasma5-theme-palemoon-options-browser-overlay"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"
+    src="chrome://plasma5-theme-palemoon-options/content/browserOverlay.js" />
+
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="plasma5-theme-palemoon-options-string-bundle"
+      src="chrome://plasma5-theme-palemoon-options/locale/browserOverlay.properties" />
+  </stringbundleset>
+
+  <menupopup id="menu_ToolsPopup">
+  <menuseparator/>  
+  <menuitem id="plasma5-theme-palemoon-options-hello-menu-item-1"
+         label="&xulschoolhello.hello.label;"
+         oncommand="XULSchoolChrome.BrowserOverlay.sayHello(event);" />
+  </menupopup>
+
+  <vbox id="appmenuSecondaryPane">
+    <menu id="plasma5-theme-palemoon-options-hello-menu-2" label="&xulschoolhello.hello.label;"
+      accesskey="&xulschoolhello.helloMenu.accesskey;"
+      insertafter="appmenu_addons">
+      <menupopup>
+        <menuitem id="plasma5-theme-palemoon-options-hello-menu-item-2"
+          label="&xulschoolhello.hello.label;"
+          accesskey="&xulschoolhello.helloItem.accesskey;"
+          oncommand="plasma5ThemeOptions.onMenuItemCommand(event);" />
+      </menupopup>
+    </menu>
+  </vbox>
+</overlay>
