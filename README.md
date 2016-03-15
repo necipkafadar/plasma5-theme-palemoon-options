@@ -1,0 +1,1 @@
+# plasma5-theme-palemoon-options
