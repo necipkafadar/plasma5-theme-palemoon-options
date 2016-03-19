@@ -1,17 +1,51 @@
+var plasma5ThemeOptions = {
+	prefs: null,
+	colorScheme: "",
 
-if ("undefined" == typeof(plasma5Theme)) {
-  var plasma5Theme = {};
-};
+	// Initialize the extension
 
-plasma5ThemeOptions = {
+	init: function() {
+		this.prefs = Components.classes["@mozilla.org/preferences-service;1"]
+				.getService(Components.interfaces.nsIPrefService)
+				.getBranch("plasma5opt.");
+		this.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
+		this.prefs.addObserver("", this, false);		
+		
+		this.colorScheme = this.prefs.getCharPref("colorScheme");
+		this.applyCSS(this.colorScheme);
+    },
+	
+	observe: function(subject, topic, data) {
+		if (topic != "nsPref:changed")
+		{
+			return;
+		}
 
-  sayHello : function(aEvent) {
-    let stringBundle = document.getElementById("plasma5-theme-palemoon-options-string-bundle");
-    let message = stringBundle.getString("xulschoolhello.greeting.label");
-
-    window.alert(message);
-  }
-  onMenuItemCommand: function(e) {
-	window.openDialog("chrome://plasma5-theme-palemoon-options/content/options.xul","chrome, toolbar, dialog, resizable=no").focus();
-  }
-};
+		switch(data)
+		{
+			case "colorScheme":
+				this.colorScheme = this.prefs.getCharPref("colorScheme");
+				this.applyCSS(this.colorScheme);
+				break;
+		}
+	},
+	
+	watchColorScheme: function(newColorScheme) {
+		this.prefs.setCharPref("colorScheme", newColorScheme);
+	},
+	
+ 	onMenuItemCommand: function(e) {
+		window.openDialog("chrome://plasma5-theme-palemoon-options/content/options.xul","chrome, toolbar, dialog, resizable=no").focus();
+	},
+	
+	applyCSS: function(sheetName) {
+	 	var sss = Components.classes["@mozilla.org/content/style-sheet-service;1"]
+	                   .getService(Components.interfaces.nsIStyleSheetService);
+		var ios = Components.classes["@mozilla.org/network/io-service;1"]
+	                   .getService(Components.interfaces.nsIIOService);
+		var uri = ios.newURI("chrome://browser/skin/subskins/"+sheetName+".css", null, null);
+						sss.loadAndRegisterSheet(uri, sss.AGENT_SHEET);
+	},
+	
+}
+window.addEventListener("load", function(e) { plasma5ThemeOptions.init(); }, false);

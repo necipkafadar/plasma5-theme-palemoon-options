@@ -8,7 +8,8 @@
   "chrome://plasma5-theme-palemoon-options/locale/browserOverlay.dtd">
 
 <overlay id="plasma5-theme-palemoon-options-browser-overlay"
-  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  onload="plasma5ThemeOptions.init()">
 
   <script type="application/x-javascript"
     src="chrome://plasma5-theme-palemoon-options/content/browserOverlay.js" />
@@ -21,20 +22,8 @@
   <menupopup id="menu_ToolsPopup">
   <menuseparator/>  
   <menuitem id="plasma5-theme-palemoon-options-hello-menu-item-1"
-         label="&xulschoolhello.hello.label;"
-         oncommand="XULSchoolChrome.BrowserOverlay.sayHello(event);" />
+         label="&plasma5theme.toolbar.label;"
+         oncommand="plasma5ThemeOptions.onMenuItemCommand(event);"  />
   </menupopup>
 
-  <vbox id="appmenuSecondaryPane">
-    <menu id="plasma5-theme-palemoon-options-hello-menu-2" label="&xulschoolhello.hello.label;"
-      accesskey="&xulschoolhello.helloMenu.accesskey;"
-      insertafter="appmenu_addons">
-      <menupopup>
-        <menuitem id="plasma5-theme-palemoon-options-hello-menu-item-2"
-          label="&xulschoolhello.hello.label;"
-          accesskey="&xulschoolhello.helloItem.accesskey;"
-          oncommand="plasma5ThemeOptions.onMenuItemCommand(event);" />
-      </menupopup>
-    </menu>
-  </vbox>
 </overlay>

@@ -1,3 +1,2 @@
-<!ENTITY xulschoolhello.hello.label            "Hello World!">
-<!ENTITY xulschoolhello.helloMenu.accesskey    "l">
-<!ENTITY xulschoolhello.helloItem.accesskey    "H">
+<!ENTITY plasma5theme.toolbar.label            "Plasma5 Theme Options">
+<!ENTITY plasma5theme.Menu.accesskey    "l">

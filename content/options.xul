@@ -1,1 +1,29 @@
- 
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+		    id="plasma5opt"
+		    title="Plasma5 Theme Options"
+			height="200px"
+			width="300px">
+
+<script type="application/x-javascript"
+  src="chrome://plasma5-theme-palemoon-options/content/browserOverlay.js"/>
+
+  <prefpane id="panel" label="Plasma5 Theme Options">
+	<preferences>
+	  <preference id="colorSchemes" name="" type="string"/>
+	</preferences>
+	<hbox>
+	  <label id="colorSchemeLabel" flex="1">Color Scheme:</label>
+	  <menulist id="colorSchemeList" preference="colorSchemes" flex="1">
+		<menupopup>
+		  <menuitem id="plasma5" value="plasma5" label="Plasma5"
+		  oncommand="plasma5ThemeOptions.watchColorScheme('plasma5')"/>
+		  <menuitem id="plasma5-dark" value="plasma5-dark" label="Plasma5 Dark"
+		  oncommand="plasma5ThemeOptions.watchColorScheme('plasma5-dark')"/>
+		</menupopup>
+	  </menulist>
+	</hbox>
+
+  </prefpane>
+</prefwindow> 
