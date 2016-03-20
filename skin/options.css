@@ -1,1 +1,8 @@
- 
+#colorSchemeLabel {
+    margin: 7px 0 0 0;
+}
+#colorSchemeList {
+    -moz-appearance: menulist;
+    margin: 0 0 0 10px;
+    padding: 0px;
+}
