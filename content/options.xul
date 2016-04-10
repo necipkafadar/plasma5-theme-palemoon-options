@@ -5,36 +5,45 @@
 <prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 		    id="plasma5opt"
 		    title="Plasma5 Theme Options"
-			height="150px"
-			width="300px">
+			height="200px"
+			width="500px">
 
 <script type="application/x-javascript"
   src="chrome://plasma5-theme-palemoon-options/content/browserOverlay.js"/>
 
   <prefpane id="panel" label="Plasma5 Theme Options">
 	<preferences>
-	  <preference id="colorSchemes" name="" type="string"/>
+	  <preference id="colorSchemes" name="plasma5opt.colorScheme" type="string" instantApply="true"/>
+	  <preference id="labelTextColor" name="plasma5opt.labelTextColor" type="bool" instantApply="true"/>
+	  <preference id="labelTextColor_att" name="plasma5opt.labelTextColor_att" type="string" instantApply="true"/>
 	</preferences>
 	<hbox id="plasma5-header" align="center" flex="1">
 	  <vbox id="plasma5-header-logo">
 	  </vbox>
 	  <description id="plasma5-header-description">Plasma5 Theme Control Panel</description>
 	</hbox>
-	<vbox>
+	
 	  <tabpanels flex="1">
 	  	<tabpanel style="height: auto;" orient="horizontal">
-		  <label id="colorSchemeLabel" align="left">Color Scheme:</label>
-		  <menulist id="colorSchemeList" align="left" preference="colorSchemes">
-			<menupopup>
-			  <menuitem id="plasma5" value="plasma5" label="Plasma5"
-				oncommand="plasma5ThemeOptions.watchColorScheme('plasma5')"/>
-			  <menuitem id="plasma5-dark" value="plasma5-dark" label="Plasma5 Dark"
-				oncommand="plasma5ThemeOptions.watchColorScheme('plasma5-dark')"/>
-			</menupopup>
-		  </menulist>
+	  		<vbox>
+	  	    <row>
+		  		<label id="colorSchemeLabel" align="left">Color Scheme:</label>
+			  	<menulist id="colorSchemeList" align="left" preference="colorSchemes">
+					<menupopup>
+				  	<menuitem id="plasma5" value="plasma5" label="Plasma5"/>
+				  	<menuitem id="plasma5-dark" value="plasma5-dark" label="Plasma5 Dark"/>
+					</menupopup>
+			  	</menulist>
+		  	</row>
+			<row>
+				<checkbox label="Label Text Color:" preference="labelTextColor" id="label-color-chk"/>
+				<textbox preference="labelTextColor_att" id="label-color-txt"/>
+				<colorpicker preference="labelTextColor_att" type="button" id="label-color-picker"/>
+			</row>
+			</vbox>
 		  </tabpanel>
 	  </tabpanels>
-	</vbox>
+	
 
   </prefpane>
 </prefwindow> 
