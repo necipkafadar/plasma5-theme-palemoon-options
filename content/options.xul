@@ -16,6 +16,8 @@
 	  <preference id="colorSchemes" name="plasma5opt.colorScheme" type="string" instantApply="true"/>
 	  <preference id="labelTextColor" name="plasma5opt.labelTextColor" type="bool" instantApply="true"/>
 	  <preference id="labelTextColor_att" name="plasma5opt.labelTextColor_att" type="string" instantApply="true"/>
+	  <preference id="iconColor" name="plasma5opt.iconColor" type="bool" instantApply="true"/>
+	  <preference id="iconColor_att" name="plasma5opt.iconColor_att" type="string" instantApply="true"/>
 	</preferences>
 	<hbox id="plasma5-header" align="center" flex="1">
 	  <vbox id="plasma5-header-logo">
@@ -39,6 +41,11 @@
 				<checkbox label="Label Text Color:" preference="labelTextColor" id="label-color-chk"/>
 				<textbox preference="labelTextColor_att" id="label-color-txt"/>
 				<colorpicker preference="labelTextColor_att" type="button" id="label-color-picker"/>
+			</row>
+			<row>
+				<checkbox label="Toolbar Icon Colors:" preference="iconColor" id="icon-color-chk"/>
+				<textbox preference="iconColor_att" id="icon-color-txt"/>
+				<colorpicker preference="iconColor_att" type="button" id="icon-color-picker"/>
 			</row>
 			</vbox>
 		  </tabpanel>
