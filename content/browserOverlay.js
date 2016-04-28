@@ -9,6 +9,7 @@ var plasma5ThemeOptions = {
 	labelTextColor_att:"",
 	iconColor: "",
 	iconColor_att:"",
+	tabBorderStyle:"",
 
 	// Initialize the extension
 
@@ -34,6 +35,9 @@ var plasma5ThemeOptions = {
 			hexColorArray = this.convertHextoRGB(this.iconColor_att);
 			this.applyCSSData("iconColor", hexColorArray);
 		}
+
+		this.tabBorderStyle = this.prefs.getCharPref("tabBorderStyle");
+		this.applyCSS(this.tabBorderStyle);
     },
 	
 	observe: function(subject, topic, data) {
@@ -86,6 +90,10 @@ var plasma5ThemeOptions = {
 					hexColorArray = this.convertHextoRGB(this.iconColor_att);
 					this.applyCSSData("iconColor", hexColorArray);
 				}
+				break;
+			case "tabBorderStyle":
+				this.tabBorderStyle = this.prefs.getCharPref("tabBorderStyle");
+				this.applyCSS(this.tabBorderStyle);
 				break;
 		
 		}

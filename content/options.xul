@@ -18,6 +18,7 @@
 	  <preference id="labelTextColor_att" name="plasma5opt.labelTextColor_att" type="string" instantApply="true"/>
 	  <preference id="iconColor" name="plasma5opt.iconColor" type="bool" instantApply="true"/>
 	  <preference id="iconColor_att" name="plasma5opt.iconColor_att" type="string" instantApply="true"/>
+	  <preference id="tabBorderStyle" name="plasma5opt.tabBorderStyle" type="string" instantApply="true"/>
 	</preferences>
 	<hbox id="plasma5-header" align="center" flex="1">
 	  <vbox id="plasma5-header-logo">
@@ -47,6 +48,13 @@
 				<textbox preference="iconColor_att" id="icon-color-txt"/>
 				<colorpicker preference="iconColor_att" type="button" id="icon-color-picker"/>
 			</row>
+			<row>
+				<description class="radio-description">Tab border style:</description>
+				<radiogroup orient="horizontal" preference="tabBorderStyle">
+					<radio value="squared" label="Squared" id="squared-tabs"/>
+					<radio value="curved" label="Curved" id="curved-tabs"/>
+				</radiogroup>
+			</row>	
 			</vbox>
 		  </tabpanel>
 	  </tabpanels>
