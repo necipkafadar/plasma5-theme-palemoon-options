@@ -1,5 +1,5 @@
 #colorSchemeLabel {
-    margin: 7px 0 0 0;
+    margin: 7px 0 0 4px;
 }
 
 #colorSchemeList {
@@ -14,4 +14,8 @@
 
 .radio-description{
 	margin: 4px 10px 5px 5px;
+}
+
+.tab-size-labels{
+	margin: 8px 0 0 6px;
 }

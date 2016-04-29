@@ -5,7 +5,7 @@
 <prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 		    id="plasma5opt"
 		    title="Plasma5 Theme Options"
-			height="200px"
+			height="400px"
 			width="500px">
 
 <script type="application/x-javascript"
@@ -19,6 +19,8 @@
 	  <preference id="iconColor" name="plasma5opt.iconColor" type="bool" instantApply="true"/>
 	  <preference id="iconColor_att" name="plasma5opt.iconColor_att" type="string" instantApply="true"/>
 	  <preference id="tabBorderStyle" name="plasma5opt.tabBorderStyle" type="string" instantApply="true"/>
+	  <preference id="tabMinHeight" name="plasma5opt.tabMinHeight" type="int" instantApply="true"/>
+	  <preference id="tabMinWidth" name="plasma5opt.tabMinWidth" type="int" instantApply="true"/>
 	</preferences>
 	<hbox id="plasma5-header" align="center" flex="1">
 	  <vbox id="plasma5-header-logo">
@@ -54,7 +56,19 @@
 					<radio value="squared" label="Squared" id="squared-tabs"/>
 					<radio value="curved" label="Curved" id="curved-tabs"/>
 				</radiogroup>
-			</row>	
+			</row>
+			<row>
+				<label class="tab-size-labels" value="Tab min-width(px)"/>
+				<hbox>
+					<textbox size="3" maxlength="3" preference="tabMinWidth" type="number" min="80" id="tabMinWidth"/>
+				</hbox>
+			</row>
+			<row>
+				<label class="tab-size-labels" value="Tab min-height(px)"/>
+				<hbox>
+					<textbox size="3" maxlength="3" preference="tabMinHeight" type="number" min="25" id="tabMinHeight"/>
+				</hbox>
+			</row>		
 			</vbox>
 		  </tabpanel>
 	  </tabpanels>

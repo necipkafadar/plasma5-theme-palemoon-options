@@ -10,6 +10,8 @@ var plasma5ThemeOptions = {
 	iconColor: "",
 	iconColor_att:"",
 	tabBorderStyle:"",
+	tabMinWidth:"",
+	tabMinHeight:"",
 
 	// Initialize the extension
 
@@ -27,17 +29,23 @@ var plasma5ThemeOptions = {
 		this.labelTextColor = this.prefs.getBoolPref("labelTextColor");
 		this.labelTextColor_att = this.prefs.getCharPref("labelTextColor_att");
 		if(this.labelTextColor==true) 
-			this.applyCSSData("labelTextColor", this.labelTextColor_att);
+			this.applyCSSDataColor("labelTextColor", this.labelTextColor_att);
 
 		this.iconColor = this.prefs.getBoolPref("iconColor");
 		this.iconColor_att = this.prefs.getCharPref("iconColor_att");
 		if(this.iconColor==true) {
 			hexColorArray = this.convertHextoRGB(this.iconColor_att);
-			this.applyCSSData("iconColor", hexColorArray);
+			this.applyCSSDataColor("iconColor", hexColorArray);
 		}
 
 		this.tabBorderStyle = this.prefs.getCharPref("tabBorderStyle");
 		this.applyCSS(this.tabBorderStyle);
+
+		this.tabMinWidth = this.prefs.getIntPref("tabMinWidth");
+		this.applyCSSData("tabMinWidth");
+
+		this.tabMinHeight = this.prefs.getIntPref("tabMinHeight");
+		this.applyCSSData("tabMinHeight");
     },
 	
 	observe: function(subject, topic, data) {
@@ -56,19 +64,19 @@ var plasma5ThemeOptions = {
 				this.labelTextColor = this.prefs.getBoolPref("labelTextColor");
 				if(this.labelTextColor==true) {
 					this.labelTextColor_att = this.prefs.getCharPref("labelTextColor_att");
-					this.applyCSSData("labelTextColor", this.labelTextColor_att);
+					this.applyCSSDataColor("labelTextColor", this.labelTextColor_att);
 				}
 				else {
 					if(this.colorScheme == "plasma5-dark")
-						this.applyCSSData("labelTextColor", "#eff0f1");
+						this.applyCSSDataColor("labelTextColor", "#eff0f1");
 					else
-						this.applyCSSData("labelTextColor", "#3D3D3D");
+						this.applyCSSDataColor("labelTextColor", "#3D3D3D");
 				}
 				break;
 			case "labelTextColor_att":
 				if(this.labelTextColor==true) {
 					this.labelTextColor_att = this.prefs.getCharPref("labelTextColor_att");
-					this.applyCSSData("labelTextColor", this.labelTextColor_att);
+					this.applyCSSDataColor("labelTextColor", this.labelTextColor_att);
 				}
 				break;
 			case "iconColor":
@@ -77,25 +85,30 @@ var plasma5ThemeOptions = {
 				if(this.iconColor==true) {
 					this.iconColor_att = this.prefs.getCharPref("iconColor_att");
 					hexColorArray = this.convertHextoRGB(this.iconColor_att);
-					this.applyCSSData("iconColor", hexColorArray);
+					this.applyCSSDataColor("iconColor", hexColorArray);
 				}
 				else {
 					hexColorArray = this.convertHextoRGB("#000000");
-					this.applyCSSData("iconColor", hexColorArray);
+					this.applyCSSDataColor("iconColor", hexColorArray);
 				}
 				break;
 			case "iconColor_att":
 				if(this.iconColor==true) {
 					this.iconColor_att = this.prefs.getCharPref("iconColor_att");
 					hexColorArray = this.convertHextoRGB(this.iconColor_att);
-					this.applyCSSData("iconColor", hexColorArray);
+					this.applyCSSDataColor("iconColor", hexColorArray);
 				}
 				break;
 			case "tabBorderStyle":
 				this.tabBorderStyle = this.prefs.getCharPref("tabBorderStyle");
 				this.applyCSS(this.tabBorderStyle);
 				break;
-		
+			case "tabMinHeight":
+				this.applyCSSData("tabMinHeight");
+				break;
+			case "tabMinWidth":
+				this.applyCSSData("tabMinWidth");
+				break;
 		}
 	},
 
@@ -109,7 +122,7 @@ var plasma5ThemeOptions = {
 			sss.loadAndRegisterSheet(uri, sss.AGENT_SHEET);
 	},
 
-	applyCSSData: function (item, color) {
+	applyCSSDataColor: function (item, color) {
 	    switch(item) {
 	    	case "labelTextColor":
 	    		var uri = ios.newURI("data:text/css;charset=utf-8," + encodeURIComponent("\
@@ -137,6 +150,27 @@ var plasma5ThemeOptions = {
 	    }
 	    if(!sss.sheetRegistered(uri, sss.USER_SHEET))
 			sss.loadAndRegisterSheet(uri, sss.AGENT_SHEET); 
+	},
+
+	applyCSSData: function(item) {
+		switch(item) {
+			case "tabMinWidth":
+				var uri = ios.newURI("data:text/css;charset=utf-8," + encodeURIComponent('\
+					tab {\
+						min-width:'+this.prefs.getIntPref('tabMinWidth')+'px !important;\
+					}\
+				'), null, null);
+			break;
+			case "tabMinHeight":
+				var uri = ios.newURI("data:text/css;charset=utf-8," + encodeURIComponent('\
+					tab {\
+						min-height:'+this.prefs.getIntPref('tabMinHeight')+'px !important;\
+					}\
+				'), null, null);
+			break;
+		}
+			if(!sss.sheetRegistered(uri, sss.USER_SHEET))
+			sss.loadAndRegisterSheet(uri, sss.AGENT_SHEET);
 	},
 
 	convertHextoRGB: function(hex) {
