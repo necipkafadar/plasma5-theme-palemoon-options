@@ -6,7 +6,8 @@
 		    id="plasma5opt"
 		    title="Plasma5 Theme Options"
 			height="400px"
-			width="500px">
+			width="500px"
+			onload="plasma5ThemeOptions.checkElements()">
 
 <script type="application/x-javascript"
   src="chrome://plasma5-theme-palemoon-options/content/browserOverlay.js"/>
@@ -14,6 +15,8 @@
   <prefpane id="panel" label="Plasma5 Theme Options">
 	<preferences>
 	  <preference id="colorSchemes" name="plasma5opt.colorScheme" type="string" instantApply="true"/>
+	  <preference id="customColorScheme_att1" name="plasma5opt.customColorScheme_att1" type="string" instantApply="true"/>
+	  <preference id="customColorScheme_att2" name="plasma5opt.customColorScheme_att2" type="string" instantApply="true"/>
 	  <preference id="labelTextColor" name="plasma5opt.labelTextColor" type="bool" instantApply="true"/>
 	  <preference id="labelTextColor_att" name="plasma5opt.labelTextColor_att" type="string" instantApply="true"/>
 	  <preference id="iconColor" name="plasma5opt.iconColor" type="bool" instantApply="true"/>
@@ -25,54 +28,72 @@
 	<hbox id="plasma5-header" align="center" flex="1">
 	  <vbox id="plasma5-header-logo">
 	  </vbox>
-	  <description id="plasma5-header-description">Plasma5 Theme Control Panel</description>
 	</hbox>
-	
-	  <tabpanels flex="1">
-	  	<tabpanel style="height: auto;" orient="horizontal">
-	  		<vbox>
-	  	    <row>
-		  		<label id="colorSchemeLabel" align="left">Color Scheme:</label>
-			  	<menulist id="colorSchemeList" align="left" preference="colorSchemes">
-					<menupopup>
-				  	<menuitem id="plasma5" value="plasma5" label="Plasma5"/>
-				  	<menuitem id="plasma5-dark" value="plasma5-dark" label="Plasma5 Dark"/>
-					</menupopup>
-			  	</menulist>
-		  	</row>
-			<row>
-				<checkbox label="Label Text Color:" preference="labelTextColor" id="label-color-chk"/>
-				<textbox preference="labelTextColor_att" id="label-color-txt"/>
-				<colorpicker preference="labelTextColor_att" type="button" id="label-color-picker"/>
-			</row>
-			<row>
-				<checkbox label="Toolbar Icon Colors:" preference="iconColor" id="icon-color-chk"/>
-				<textbox preference="iconColor_att" id="icon-color-txt"/>
-				<colorpicker preference="iconColor_att" type="button" id="icon-color-picker"/>
-			</row>
-			<row>
-				<description class="radio-description">Tab border style:</description>
-				<radiogroup orient="horizontal" preference="tabBorderStyle">
-					<radio value="squared" label="Squared" id="squared-tabs"/>
-					<radio value="curved" label="Curved" id="curved-tabs"/>
-				</radiogroup>
-			</row>
-			<row>
-				<label class="tab-size-labels" value="Tab min-width(px)"/>
-				<hbox>
-					<textbox size="3" maxlength="3" preference="tabMinWidth" type="number" min="80" id="tabMinWidth"/>
-				</hbox>
-			</row>
-			<row>
-				<label class="tab-size-labels" value="Tab min-height(px)"/>
-				<hbox>
-					<textbox size="3" maxlength="3" preference="tabMinHeight" type="number" min="25" id="tabMinHeight"/>
-				</hbox>
-			</row>		
-			</vbox>
-		  </tabpanel>
-	  </tabpanels>
-	
+		<tabbox>
+			<tabs>
+				<tab class="option-tab" label="Color Scheme"/>
+				<tab class="option-tab" label="Other"/>
+			</tabs>
+
+	  		<tabpanels flex="1">
+			  	<tabpanel style="height: 50px;" orient="horizontal">
+			  		<vbox>
+			  	    <row>
+				  		<label id="colorSchemeLabel" align="left">Color Scheme:</label>
+					  	<menulist id="colorSchemeList" align="left" preference="colorSchemes">
+							<menupopup>
+						  	<menuitem id="plasma5" value="plasma5" label="Plasma5"/>
+						  	<menuitem id="plasma5-dark" value="plasma5-dark" label="Plasma5 Dark"/>
+						  	<menuitem id="plasma5-custom" value="custom-scheme" label="Custom Scheme"/>
+							</menupopup>
+					  	</menulist>
+				  	</row>
+				  	<row id="custom-scheme" style="margin-top: 3px;">
+				  		<label class="color-label">Color 1:</label>
+						<textbox class="color-textbox" preference="customColorScheme_att1" id="custom-scheme-txt1"/>
+						<colorpicker preference="customColorScheme_att1" type="button" id="scheme-color-picker1"/>
+						<label class="color-label">Color 2:</label>
+						<textbox class="color-textbox" preference="customColorScheme_att2" id="custom-scheme-txt2"/>
+						<colorpicker preference="customColorScheme_att2" type="button" id="scheme-color-picker2"/>
+					</row>					
+					</vbox>
+				</tabpanel>
+
+				<tabpanel style="height: auto;" orient="horizontal">
+					<vbox>
+						<row>
+						<checkbox label="Label Text Color:" preference="labelTextColor" id="label-color-chk"/>
+						<textbox class="color-textbox" preference="labelTextColor_att" id="label-color-txt"/>
+						<colorpicker preference="labelTextColor_att" type="button" id="label-color-picker"/>
+					</row>
+					<row>
+						<checkbox label="Toolbar Icon Colors:" preference="iconColor" id="icon-color-chk"/>
+						<textbox class="color-textbox" preference="iconColor_att" id="icon-color-txt"/>
+						<colorpicker preference="iconColor_att" type="button" id="icon-color-picker"/>
+					</row>
+					<row>
+						<description class="radio-description">Tab border style:</description>
+						<radiogroup orient="horizontal" preference="tabBorderStyle">
+							<radio value="squared" label="Squared" id="squared-tabs"/>
+							<radio value="curved" label="Curved" id="curved-tabs"/>
+						</radiogroup>
+					</row>
+					<row>
+						<label class="tab-size-labels" value="Tab min-width(px)"/>
+						<hbox>
+							<textbox size="3" maxlength="3" preference="tabMinWidth" type="number" min="80" id="tabMinWidth"/>
+						</hbox>
+					</row>
+					<row>
+						<label class="tab-size-labels" value="Tab min-height(px)"/>
+						<hbox>
+							<textbox size="3" maxlength="3" preference="tabMinHeight" type="number" min="25" id="tabMinHeight"/>
+						</hbox>
+					</row>		
+					</vbox>
+				</tabpanel>	
+			</tabpanels>
+		</tabbox>
 
   </prefpane>
 </prefwindow> 

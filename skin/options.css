@@ -19,3 +19,24 @@
 .tab-size-labels{
 	margin: 8px 0 0 6px;
 }
+
+.color-textbox {
+	width: 80px;
+}
+
+.option-tab {
+	background-color: #bdc3c7;
+	min-height: 27px !important;
+}
+
+.option-tab:hover {
+	background-color: #93cee9; 
+}
+
+.option-tab[selected="true"] {
+	background-color: #fcfcfc;
+}
+
+.color-label {
+	margin: 5px 0 0 4px;
+}

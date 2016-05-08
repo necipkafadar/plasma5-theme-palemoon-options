@@ -59,6 +59,7 @@ var plasma5ThemeOptions = {
 			case "colorScheme":
 				this.colorScheme = this.prefs.getCharPref("colorScheme");
 				this.applyCSS(this.colorScheme);
+				this.checkElements();
 				break;
 			case "labelTextColor":
 				this.labelTextColor = this.prefs.getBoolPref("labelTextColor");
@@ -112,14 +113,24 @@ var plasma5ThemeOptions = {
 		}
 	},
 
+	checkElements: function() {
+		if(this.colorScheme == "custom-scheme") {
+			document.getElementById('custom-scheme').style.display = 'inherit';
+		}
+		else {
+			document.getElementById('custom-scheme').style.display = 'none';
+		}
+	},
+
  	onMenuItemCommand: function(e) {
 		window.openDialog("chrome://plasma5-theme-palemoon-options/content/options.xul","chrome, toolbar, dialog, resizable=no").focus();
 	},
 	
-	applyCSS: function(sheetName) {
-		var uri = ios.newURI("chrome://browser/skin/subskins/"+sheetName+".css", null, null);
-		if(!sss.sheetRegistered(uri, sss.USER_SHEET))
-			sss.loadAndRegisterSheet(uri, sss.AGENT_SHEET);
+	applyCSS: function(scheme) {	
+			var uri = ios.newURI("chrome://browser/skin/subskins/"+scheme+".css", null, null);
+			if(!sss.sheetRegistered(uri, sss.USER_SHEET))
+				sss.loadAndRegisterSheet(uri, sss.AGENT_SHEET);
+
 	},
 
 	applyCSSDataColor: function (item, color) {
