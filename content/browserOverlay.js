@@ -156,14 +156,14 @@ var plasma5ThemeOptions = {
 		switch(item) {
 			case "tabMinWidth":
 				var uri = ios.newURI("data:text/css;charset=utf-8," + encodeURIComponent('\
-					tab {\
+					.tabbrowser-tab {\
 						min-width:'+this.prefs.getIntPref('tabMinWidth')+'px !important;\
 					}\
 				'), null, null);
 			break;
 			case "tabMinHeight":
 				var uri = ios.newURI("data:text/css;charset=utf-8," + encodeURIComponent('\
-					tab {\
+					.tabbrowser-tab, .tabs-newtab-button {\
 						min-height:'+this.prefs.getIntPref('tabMinHeight')+'px !important;\
 					}\
 				'), null, null);
