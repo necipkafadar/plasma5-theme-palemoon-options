@@ -31,7 +31,7 @@
 	border-bottom: 0px !important;
 	background-color: #bdc3c7;
 	min-height: 27px !important;
-	margin-top: 3px;
+	margin-top: 3px !important;
 }
 
 .option-tab:hover {
