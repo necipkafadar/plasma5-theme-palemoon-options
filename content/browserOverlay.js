@@ -157,7 +157,8 @@ var plasma5ThemeOptions = {
 					.tabbrowser-tab, .tabs-newtab-button, ::-moz-selection, button, .category,\
 					.alert, .option-tab[selected='true'], menubar > menu[open], menu[_moz-menuactive='true'],\
 					menuitem[_moz-menuactive='true'], .splitmenu-menuitem[_moz-menuactive='true'],\
-					button:hover, .addon[selected] {\
+					button:hover, .addon[selected], .autocomplete-richlistitem:hover,\
+					.autocomplete-richlistitem[selected='true'] {\
 						background-color: "+color2+" !important;\
 					}\
 					.tabbrowser-tab:hover,.tabs-newtab-button:hover, .category[selected],\
