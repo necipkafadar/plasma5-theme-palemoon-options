@@ -25,8 +25,13 @@
 }
 
 .option-tab {
+	border-top: 1px solid black !important;
+	border-right: 1px solid black !important;
+	border-left: 1px solid black !important;;
+	border-bottom: 0px !important;
 	background-color: #bdc3c7;
 	min-height: 27px !important;
+	margin-top: 3px;
 }
 
 .option-tab:hover {
@@ -35,6 +40,8 @@
 
 .option-tab[selected="true"] {
 	background-color: #fcfcfc;
+	z-index: 1;
+	margin-top: 0px;
 }
 
 .color-label {

@@ -151,16 +151,17 @@ var plasma5ThemeOptions = {
 		var uri = ios.newURI("data:text/css;charset=utf-8," + encodeURIComponent("\
 	    			menubar, toolbar, #addon-bar, nav-bar, .tabbrowser-tab[selected='true'],\
 	    			menupopup, panel, window, page, dialog, wizard, prefwindow, prefpane, .addon,\
-	    			.panel-arrowcontent, tabpanels {\
+	    			.panel-arrowcontent, tabpanels, .option-tab {\
   						background-color: "+color1+" !important;\
 					}\
 					.tabbrowser-tab, .tabs-newtab-button, ::-moz-selection, button, .category,\
-					.alert, .option-tab, menubar > menu[open], menu[_moz-menuactive='true'],\
+					.alert, .option-tab[selected='true'], menubar > menu[open], menu[_moz-menuactive='true'],\
 					menuitem[_moz-menuactive='true'], .splitmenu-menuitem[_moz-menuactive='true'],\
 					button:hover, .addon[selected] {\
 						background-color: "+color2+" !important;\
 					}\
-					.tabbrowser-tab:hover,.tabs-newtab-button:hover, .category[selected] {\
+					.tabbrowser-tab:hover,.tabs-newtab-button:hover, .category[selected],\
+					.option-tab:hover {\
 						background-color: rgb("+additionalColor[0]+","+additionalColor[1]+",\
 						"+additionalColor[2]+") !important;\
 					}\
