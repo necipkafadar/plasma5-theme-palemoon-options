@@ -41,7 +41,7 @@
 .option-tab[selected="true"] {
 	background-color: #fcfcfc;
 	z-index: 1;
-	margin-top: 0px;
+	margin-top: 0px !important;
 }
 
 .color-label {
