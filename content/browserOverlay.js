@@ -12,6 +12,8 @@ var plasma5ThemeOptions = {
 	tabBorderStyle:"",
 	tabMinWidth:"",
 	tabMinHeight:"",
+	customColorScheme_att1:"",
+	customColorScheme_att2:"",
 
 	// Initialize the extension
 
@@ -24,7 +26,8 @@ var plasma5ThemeOptions = {
 		
 		this.colorScheme = this.prefs.getCharPref("colorScheme");
 		this.applyCSS(this.colorScheme);
-
+		if(this.colorScheme == "custom-scheme")
+			this.applyCustomScheme();
 
 		this.labelTextColor = this.prefs.getBoolPref("labelTextColor");
 		this.labelTextColor_att = this.prefs.getCharPref("labelTextColor_att");
@@ -34,7 +37,7 @@ var plasma5ThemeOptions = {
 		this.iconColor = this.prefs.getBoolPref("iconColor");
 		this.iconColor_att = this.prefs.getCharPref("iconColor_att");
 		if(this.iconColor==true) {
-			hexColorArray = this.convertHextoRGB(this.iconColor_att);
+			hexColorArray = this.convertHextoRGB(this.iconColor_att,true);
 			this.applyCSSDataColor("iconColor", hexColorArray);
 		}
 
@@ -58,8 +61,14 @@ var plasma5ThemeOptions = {
 		{
 			case "colorScheme":
 				this.colorScheme = this.prefs.getCharPref("colorScheme");
-				this.applyCSS(this.colorScheme);
 				this.checkElements();
+				this.applyCSS(this.colorScheme);
+				if(this.colorScheme == "custom-scheme")
+					this.applyCustomScheme();
+				break;
+			case "customColorScheme_att1":
+			case "customColorScheme_att2":
+				this.applyCustomScheme();
 				break;
 			case "labelTextColor":
 				this.labelTextColor = this.prefs.getBoolPref("labelTextColor");
@@ -85,18 +94,18 @@ var plasma5ThemeOptions = {
 				this.iconColor = this.prefs.getBoolPref("iconColor");
 				if(this.iconColor==true) {
 					this.iconColor_att = this.prefs.getCharPref("iconColor_att");
-					hexColorArray = this.convertHextoRGB(this.iconColor_att);
+					hexColorArray = this.convertHextoRGB(this.iconColor_att,true);
 					this.applyCSSDataColor("iconColor", hexColorArray);
 				}
 				else {
-					hexColorArray = this.convertHextoRGB("#000000");
+					hexColorArray = this.convertHextoRGB("#000000",true);
 					this.applyCSSDataColor("iconColor", hexColorArray);
 				}
 				break;
 			case "iconColor_att":
 				if(this.iconColor==true) {
 					this.iconColor_att = this.prefs.getCharPref("iconColor_att");
-					hexColorArray = this.convertHextoRGB(this.iconColor_att);
+					hexColorArray = this.convertHextoRGB(this.iconColor_att,true);
 					this.applyCSSDataColor("iconColor", hexColorArray);
 				}
 				break;
@@ -114,6 +123,7 @@ var plasma5ThemeOptions = {
 	},
 
 	checkElements: function() {
+		this.colorScheme = this.prefs.getCharPref("colorScheme");
 		if(this.colorScheme == "custom-scheme") {
 			document.getElementById('custom-scheme').style.display = 'inherit';
 		}
@@ -131,6 +141,32 @@ var plasma5ThemeOptions = {
 			if(!sss.sheetRegistered(uri, sss.USER_SHEET))
 				sss.loadAndRegisterSheet(uri, sss.AGENT_SHEET);
 
+	},
+
+	applyCustomScheme: function() {
+		var color1 = this.prefs.getCharPref('customColorScheme_att1');
+		var color2 = this.prefs.getCharPref('customColorScheme_att2');
+		var additionalColor = this.convertHextoRGB(color2,false);
+		additionalColor = this.generateAdditionalColor(additionalColor);
+		var uri = ios.newURI("data:text/css;charset=utf-8," + encodeURIComponent("\
+	    			menubar, toolbar, #addon-bar, nav-bar, .tabbrowser-tab[selected='true'],\
+	    			menupopup, panel, window, page, dialog, wizard, prefwindow, prefpane, .addon,\
+	    			.panel-arrowcontent, tabpanels {\
+  						background-color: "+color1+" !important;\
+					}\
+					.tabbrowser-tab, .tabs-newtab-button, ::-moz-selection, button, .category,\
+					.alert, .option-tab, menubar > menu[open], menu[_moz-menuactive='true'],\
+					menuitem[_moz-menuactive='true'], .splitmenu-menuitem[_moz-menuactive='true'],\
+					button:hover, .addon[selected] {\
+						background-color: "+color2+" !important;\
+					}\
+					.tabbrowser-tab:hover,.tabs-newtab-button:hover, .category[selected] {\
+						background-color: rgb("+additionalColor[0]+","+additionalColor[1]+",\
+						"+additionalColor[2]+") !important;\
+					}\
+	    			"), null, null);
+		if(!sss.sheetRegistered(uri, sss.USER_SHEET))
+			sss.loadAndRegisterSheet(uri, sss.AGENT_SHEET);
 	},
 
 	applyCSSDataColor: function (item, color) {
@@ -184,13 +220,34 @@ var plasma5ThemeOptions = {
 			sss.loadAndRegisterSheet(uri, sss.AGENT_SHEET);
 	},
 
-	convertHextoRGB: function(hex) {
+	convertHextoRGB: function(hex, normalized) {
 		var result = new Object();
 		hex = hex.replace('#','');
-    	result[0] = parseInt(hex.substring(0,2), 16) / 255;
-    	result[1] = parseInt(hex.substring(2,4), 16) / 255;
-    	result[2] = parseInt(hex.substring(4,6), 16) / 255;
+		if(normalized == true) {
+    		result[0] = parseInt(hex.substring(0,2), 16) / 255;
+    		result[1] = parseInt(hex.substring(2,4), 16) / 255;
+    		result[2] = parseInt(hex.substring(4,6), 16) / 255;
+    	}
+    	if(normalized == false) {
+    		result[0] = parseInt(hex.substring(0,2), 16);
+    		result[1] = parseInt(hex.substring(2,4), 16);
+    		result[2] = parseInt(hex.substring(4,6), 16);
+    	}
     	return result;
+	},
+
+	generateAdditionalColor: function(color) {
+		if(color[0] > 205 || color[1] > 205 || color[2]) {
+			color[0] -= 50;
+			color[1] -= 50;
+			color[2] -= 50;
+		}
+		else {
+			color[0] += 50;
+			color[1] += 50;
+			color[2] += 50;
+		}
+		return color;
 	},
 
 }
