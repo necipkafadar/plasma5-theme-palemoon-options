@@ -151,7 +151,7 @@ var plasma5ThemeOptions = {
 		var uri = ios.newURI("data:text/css;charset=utf-8," + encodeURIComponent("\
 	    			menubar, toolbar, #addon-bar, nav-bar, .tabbrowser-tab[selected='true'],\
 	    			menupopup, panel, window, page, dialog, wizard, prefwindow, prefpane, .addon,\
-	    			.panel-arrowcontent, tabpanels, .option-tab {\
+	    			.panel-arrowcontent, tabpanels, .option-tab, .alertBox {\
   						background-color: "+color1+" !important;\
 					}\
 					.tabbrowser-tab, .tabs-newtab-button, ::-moz-selection, button, .category,\
@@ -254,3 +254,4 @@ var plasma5ThemeOptions = {
 
 }
 window.addEventListener("load", function(e) { plasma5ThemeOptions.init(); }, false);
+window.addEventListener("load", function(e) { plasma5ThemeOptions.checkElements(); }, false);
